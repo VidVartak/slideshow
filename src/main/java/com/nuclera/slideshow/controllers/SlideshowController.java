@@ -74,7 +74,7 @@ public class SlideshowController {
             paused=true;
             Platform.runLater(
                     () -> {
-                        playPauseButton.setText(">");
+                        setButtonToPause();
                     }
             );
         }
@@ -90,7 +90,7 @@ public class SlideshowController {
                     log.info("displayed image #"+j);
                     Platform.runLater(
                             () -> {
-                                statusLabel.setText(fileNames.get(j-1).toString()+" ("+(j)+"/"+fileNames.size()+")");
+                                statusLabel.setText("Showing: "+fileNames.get(j-1).getFileName().toString()+" ("+(j)+"/"+fileNames.size()+")");
                                 statusLabel.setTextFill(Color.valueOf("Blue"));
                             }
                     );
@@ -158,16 +158,17 @@ public class SlideshowController {
     }
 
     public void browseAction(ActionEvent actionEvent) {
-        final DirectoryChooser directoryChooser = new DirectoryChooser();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
 
         Stage stage = (Stage) rootPane.getScene().getWindow();
         imageFolder = directoryChooser.showDialog(stage);
 
         if (imageFolder!=null){
             folderTextField.setText(imageFolder.getAbsolutePath());
+            log.info("imageFolder path:"+imageFolder.getAbsolutePath());
             fileNames = new ArrayList<>();
 //            Pattern imageMIMEPattern = Pattern. compile("image/.*");
-            Pattern imageMIMEPattern = Pattern. compile("image/jpeg");
+            Pattern imageMIMEPattern = Pattern.compile("image/jpeg");
             Path p = imageFolder.toPath();
             try {
                 // find all files with mime type image/... in subdirectories up to a depth of 10
@@ -212,23 +213,30 @@ public class SlideshowController {
             }
             if (showStartedSuccessfully) {
                 slideshowRunning=true;
-                playPauseButton.setText("||");
-                playPauseButton.setTooltip(new Tooltip("Pause the Slideshow"));
+                setButtonToPause();
                 slideshowPaused = false;
             }
         } else {
-            playPauseButton.setText(">");
-            playPauseButton.setTooltip(new Tooltip("Play the Slideshow"));
+            setButtonToPlay();
             pauseShow();
             slideshowPaused = true;
         }
     }
 
+    private void setButtonToPause() {
+        playPauseButton.setText("||");
+        playPauseButton.setTooltip(new Tooltip("Pause the Slideshow"));
+    }
+
+    private void setButtonToPlay() {
+        playPauseButton.setText(">");
+        playPauseButton.setTooltip(new Tooltip("Play the Slideshow"));
+    }
+
     public void restartSlideshow(){
         progressBar.setProgress(0.0);
         slideshowRunning=false;
-        playPauseButton.setText(">");
-        playPauseButton.setTooltip(new Tooltip("Play the Slideshow"));
+        setButtonToPlay();
         slideshowPaused=false;
         stopShow();
     }

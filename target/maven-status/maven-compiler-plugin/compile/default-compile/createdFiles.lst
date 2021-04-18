@@ -1,0 +1,7 @@
+com\nuclera\slideshow\SlideshowApplication.class
+com\nuclera\slideshow\events\StageReadyEvent.class
+com\nuclera\slideshow\controllers\SlideshowController.class
+com\nuclera\slideshow\threads\SlideshowThread.class
+com\nuclera\slideshow\listeners\StageInitialiser.class
+com\nuclera\slideshow\controllers\SlideshowController$SlideshowThread.class
+com\nuclera\slideshow\SlideshowStage.class

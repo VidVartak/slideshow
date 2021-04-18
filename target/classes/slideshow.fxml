@@ -15,7 +15,7 @@
         <AnchorPane prefHeight="144.0" prefWidth="974.0" BorderPane.alignment="CENTER">
             <children>
                 <TextField fx:id="folderTextField" layoutX="172.0" layoutY="12.0" prefHeight="25.0" prefWidth="490.0" text="Select the Image Directory " />
-                <Button layoutX="704.0" layoutY="12.0" mnemonicParsing="false" onAction="#browseAction" text="Browse">
+                <Button fx:id="browseButton" layoutX="704.0" layoutY="12.0" mnemonicParsing="false" onAction="#browseAction" text="Browse">
                <tooltip>
                   <Tooltip text="Choose the folder where the images are" />
                </tooltip></Button>
@@ -31,7 +31,7 @@
                <tooltip>
                   <Tooltip text="Exit the Application" />
                </tooltip></Button>
-                <Label fx:id="statusLabel" layoutX="169.0" layoutY="73.0" prefHeight="17.0" prefWidth="600.0" text="" textAlignment="CENTER" textFill="#c32a2a">
+                <Label fx:id="statusLabel" layoutX="252.0" layoutY="73.0" prefHeight="27.0" prefWidth="347.0" text="" textAlignment="CENTER" textFill="#c32a2a">
                <font>
                   <Font size="18.0" />
                </font></Label>

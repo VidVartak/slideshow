@@ -11,7 +11,9 @@ public class SlideshowStage extends Application{
 
     @Override
     public void init() {
-        applicationContext = new SpringApplicationBuilder(SlideshowApplication.class).run();
+        SpringApplicationBuilder builder = new SpringApplicationBuilder(SlideshowApplication.class);
+        builder.headless(false);
+        applicationContext = builder.run();
     }
 
     @Override
