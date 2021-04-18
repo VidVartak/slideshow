@@ -47,6 +47,9 @@ public class SlideshowController {
     @FXML
     private Label statusLabel;
 
+    @FXML
+    private ChoiceBox<String> delay;
+
     @Value("${slideshow.millisPerSlide}")
     private int millisPerSlide;
 
@@ -74,7 +77,7 @@ public class SlideshowController {
             paused=true;
             Platform.runLater(
                     () -> {
-                        setButtonToPause();
+                        setButtonToPlay();
                     }
             );
         }
@@ -94,7 +97,7 @@ public class SlideshowController {
                                 statusLabel.setTextFill(Color.valueOf("Blue"));
                             }
                     );
-                    Thread.currentThread().sleep(millisPerSlide);
+                    Thread.currentThread().sleep(Integer.valueOf(delay.getValue())*1000);
                     synchronized (this)
                     {
                         while (paused){
@@ -155,6 +158,7 @@ public class SlideshowController {
 
     private void resumeShow(){
         th.resumeShow();
+        log.info("delay chosen:"+delay.getValue());
     }
 
     public void browseAction(ActionEvent actionEvent) {
